@@ -8,9 +8,11 @@ namespace Roman_To_Integer
 {
     class Program
     {
+       public static Dictionary<char,int> MyDic=new Dictionary<char, int>();
         static void Main(string[] args)
         {
-            Console.WriteLine(Numeral("CLX"));
+            DictioneryAdd();
+            Console.WriteLine(Numeral("MMMM"));
         }
         public static int Numeral(string s)
         {
@@ -19,19 +21,19 @@ namespace Roman_To_Integer
             {
                 if (i != s.Length - 1)
                 {
-                    if ((RomanToNumeral(s[i]) < RomanToNumeral(s[i+1])))
+                    if (MyDic[s[i]] < MyDic[s[i + 1]])
                     {
-                        number += RomanToNumeral(s[i + 1]) - RomanToNumeral(s[i]);
+                        number += MyDic[s[i + 1]] - MyDic[s[i]];
                         i++;
                     }
                     else
                     {
-                        number += RomanToNumeral(s[i]);
+                        number += MyDic[s[i]];
                     }
                 }
                 else
                 {
-                    number += RomanToNumeral(s[i]);
+                    number += MyDic[s[i]];
                 }
 
             }
@@ -67,5 +69,17 @@ namespace Roman_To_Integer
             }
             return Numeral;
         }
+
+        public static void DictioneryAdd()
+        {
+            MyDic.Add('I',1);
+            MyDic.Add('V', 5);
+            MyDic.Add('X', 10);
+            MyDic.Add('L', 50);
+            MyDic.Add('C', 100);
+            MyDic.Add('D', 500);
+            MyDic.Add('M', 1000);
+        }
+
     }   
 }
